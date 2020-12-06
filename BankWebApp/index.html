@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bank Web D-App</title>
+</head>
+<body>
+
+	<div>
+		<input type="text" id="amount">
+		<p id="balance"></p>
+		<button id="deposit">Deposit</button>
+		<button id="withdraw">Withdraw</button>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+
+		var contract;
+
+		$(document).ready(function()
+		{
+			web3 = new Web3(web3.currentProvider);
+			var address = "";
+			var abi = ;
+
+			contract = new web3.eth.Contract(abi, address);
+
+			contract.methods.getBalance().call().then(function(balance)
+			{
+				$('#balance').html(balance);
+			})
+		})
+
+		$('#deposit').click(function()
+		{
+			var amount = 0;
+			amount = parseInt($('$amount').val());
+
+			web3.eth.getAccounts().then(function(account)
+			{
+				var account = accounts[0];
+
+				return contract.methods.deposit(amount).send({from: account});
+
+			}).then(function(transaction)
+			{
+				console.log(transaction);
+
+			}).catch(function(transaction)
+			{
+				console.log(transaction);
+			})
+		})
+
+
+		$('#withdraw').click(function()
+		{
+			var amount = 0;
+			amount = parseInt($('$amount').val());
+
+			web3.eth.getAccounts().then(function(account)
+			{
+				var account = accounts[0];
+
+				return contract.methods.withdraw(amount).send({from: account});
+
+			}).then(function(transaction)
+			{
+				console.log(transaction);
+
+			}).catch(function(transaction)
+			{
+				console.log(transaction);
+			})
+		})
+
+	</script>
+
+</body>
+</html>
